@@ -3,6 +3,7 @@ const User = require('../models/User');
 
 exports.protect = async (req, res, next) => {
   let  { token } = req.cookies;
+  console.log(token);
   if (!token) return res.status(401).json({ message: 'No token, authorization denied' });
 
   try {
