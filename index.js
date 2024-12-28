@@ -22,9 +22,10 @@ mongoose.connect(databaseUrl)
         console.log(err);
     })
 
-
+const origin1 = 'https://userclient.netlify.app';
+const origin2 = 'http://localhost:5173'
 const corsOptions = {
-    origin: 'https://usermanagement-5nl0.onrender.com',
+    origin: origin1,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH'],
 };

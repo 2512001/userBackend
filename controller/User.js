@@ -7,7 +7,7 @@ const generateToken = (id) => {
 };
 
 exports.registerUser = async (req, res) => {
-
+  console.log('trig');
   const { username, email, password } = req.body;
 
   try {
@@ -29,8 +29,10 @@ exports.registerUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
+  console.log(req.body);
   try {
     const user = await User.findOne({ email });
+    console.log(user);
     if (!user) return res.status(400).json({ message: 'Invalid credentials' });
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -64,13 +66,14 @@ exports.getUserProfile = async (req, res) => {
 };
 
 exports.updateUserProfile = async (req, res) => {
-  console.log(req.params);
   let { userId } = req.params;
   console.log(userId);
   const { email, password } = req.body;
+  console.log(req.body)
 
   try {
     const user = await User.findById(userId);
+    console.log(user);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -92,7 +95,7 @@ exports.updateUserProfile = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
