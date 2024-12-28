@@ -42,7 +42,9 @@ exports.loginUser = async (req, res) => {
 
     const options = {
       httpOnly: true,
-      expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+  secure: process.env.NODE_ENV === 'production', // Secure only in production
+  sameSite: 'lax', // Adjust based on cross-origin needs
+  maxAge: 24 * 60 * 60 * 1000, // 1 day
     };
 
     user.password = '';
